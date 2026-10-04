@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: murthy-ac-platform
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: murthy-ac-db
+          property: connectionString
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_BUSINESS_PHONE
+        value: "+91 89858 17969"
+      - key: NEXT_PUBLIC_WHATSAPP_NUMBER
+        value: "918985817969"
+      - key: NEXT_PUBLIC_BUSINESS_EMAIL
+        value: "murthi@ac.in"
+      - key: WHATSAPP_NUMBER
+        value: "918985817969"
+
+databases:
+  - name: murthy-ac-db
+    databaseName: murthy_ac
+    user: murthy_admin
+    plan: free
